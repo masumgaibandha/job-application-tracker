@@ -10,6 +10,7 @@ let availableJobs = document.getElementById("available-jobs");
 const mainContainer = document.querySelector("main");
 const filteredSection = document.getElementById("filtered-section");
 
+
 const allCards = document.getElementById("all-cards");
 
 function jobCalculation() {
@@ -58,8 +59,6 @@ function toggleStyle(id) {
     
 }
 
-
-
 mainContainer.addEventListener("click", function (event) {
 
   if(event.target.classList.contains('interview-btn')){
@@ -71,7 +70,7 @@ mainContainer.addEventListener("click", function (event) {
   const jobDescription = parentNode.querySelector(".job-description").innerText;
   const interviewBtn = parentNode.querySelector(".interview-btn").innerText;
   const rejectedBtn = parentNode.querySelector(".rejected-btn").innerText;
-  //   const deleteBtn = parentNode.querySelector('.btn-delete').innerText;
+    const deleteBtn = parentNode.querySelector('.btn-delete').innerText;
   parentNode.querySelector(".apply-status").innerText = "Interview"
 
   const cardInfo = {
@@ -82,6 +81,7 @@ mainContainer.addEventListener("click", function (event) {
     jobDescription,
     interviewBtn,
     rejectedBtn,
+    deleteBtn
   };
   const companyExist = interviewList.find(
     (item) => item.companyName == cardInfo.companyName,
@@ -93,7 +93,7 @@ mainContainer.addEventListener("click", function (event) {
   rejectedList = rejectedList.filter(item => item.companyName != cardInfo.companyName)
   jobCalculation()
 
-  if(currentStatus = 'rejected-filter')
+  if(currentStatus == 'rejected-filter')
       renderRejected()
   }
   else if(event.target.classList.contains('rejected-btn')){
@@ -105,7 +105,6 @@ mainContainer.addEventListener("click", function (event) {
   const jobDescription = parentNode.querySelector(".job-description").innerText;
   const interviewBtn = parentNode.querySelector(".interview-btn").innerText;
   const rejectedBtn = parentNode.querySelector(".rejected-btn").innerText;
-  //   const deleteBtn = parentNode.querySelector('.btn-delete').innerText;
   parentNode.querySelector(".apply-status").innerText = "Rejected"
 
   const cardInfo = {
@@ -131,9 +130,27 @@ mainContainer.addEventListener("click", function (event) {
   }
   
   jobCalculation()
-//   renderRejected()
+
   }
-  
+
+const deleteBtn = event.target.closest(".btn-delete");
+if (deleteBtn) {
+  const card = deleteBtn.closest(".card-body");
+  if (card) {
+ 
+
+    interviewList = interviewList.filter(item => item.companyName !== companyName);
+    rejectedList = rejectedList.filter(item => item.companyName !== companyName);
+
+    card.remove();
+    jobCalculation();
+
+    if (currentStatus === "interview-filter") renderInterview();
+    if (currentStatus === "rejected-filter") renderRejected();
+  }
+  return; 
+}
+
 });
 
 function renderInterview() {
