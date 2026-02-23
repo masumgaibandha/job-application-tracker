@@ -162,25 +162,6 @@ mainContainer.addEventListener("click", function (event) {
     jobCalculation();
   }
 
-  // const deleteBtn = event.target.closest(".btn-delete");
-  // if (deleteBtn) {
-  //   const card = deleteBtn.closest(".card-body");
-  // //   if (card) {
-  // //     interviewList = interviewList.filter(item => item.companyName !== companyName);
-  // //     rejectedList = rejectedList.filter(item => item.companyName !== companyName);
-
-  // //     card.remove();
-  // //     jobCalculation();
-
-  // //     if (currentStatus === "interview-filter") renderInterview();
-  // //     if (currentStatus === "rejected-filter") renderRejected();
-  // //   }
-
-  //     card.remove();
-  //     jobCalculation();
-
-  //   return;
-  // }
 });
 
 function renderInterview() {
