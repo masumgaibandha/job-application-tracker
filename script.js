@@ -1,5 +1,6 @@
 let interviewList = [];
 let rejectedList = [];
+let currentStatus = 'all'
 
 let totalCount = document.getElementById("total-count");
 let interviewCount = document.getElementById("interview-count");
@@ -34,17 +35,27 @@ function toggleStyle(id) {
   rejectedFilter.classList.add("bg-base-100");
 
   const selected = document.getElementById(id);
+  currentStatus = id; 
   selected.classList.remove("bg-base-100");
   selected.classList.add("btn-primary");
 
     if(id == 'interview-filter'){
        allCards.classList.add('hidden') 
        filteredSection.classList.remove('hidden')
+       renderInterview()
     }
+    
     else if(id == 'all-filter'){
         allCards.classList.remove('hidden')
         filteredSection.classList.add('hidden')
     }
+    else if(id == 'rejected-filter'){
+        allCards.classList.add('hidden')
+        filteredSection.classList.remove('hidden')
+        renderRejected()
+    }
+
+    
 }
 
 
@@ -79,8 +90,50 @@ mainContainer.addEventListener("click", function (event) {
   if (!companyExist) {
     interviewList.push(cardInfo);
   }
-  renderInterview()
+  rejectedList = rejectedList.filter(item => item.companyName != cardInfo.companyName)
+  jobCalculation()
+
+  if(currentStatus = 'rejected-filter')
+      renderRejected()
   }
+  else if(event.target.classList.contains('rejected-btn')){
+    const parentNode = event.target.parentNode.parentNode;
+  const companyName = parentNode.querySelector(".company-name").innerText;
+  const jobTitle = parentNode.querySelector(".job-title").innerText;
+  const benefit = parentNode.querySelector(".benefit").innerText;
+  const applyStatus = parentNode.querySelector(".apply-status").innerText;
+  const jobDescription = parentNode.querySelector(".job-description").innerText;
+  const interviewBtn = parentNode.querySelector(".interview-btn").innerText;
+  const rejectedBtn = parentNode.querySelector(".rejected-btn").innerText;
+  //   const deleteBtn = parentNode.querySelector('.btn-delete').innerText;
+  parentNode.querySelector(".apply-status").innerText = "Rejected"
+
+  const cardInfo = {
+    companyName,
+    jobTitle,
+    benefit,
+    applyStatus:'Rejected',
+    jobDescription,
+    interviewBtn,
+    rejectedBtn,
+  };
+  const companyExist = rejectedList.find(
+    (item) => item.companyName == cardInfo.companyName,
+  );
+  
+  if (!companyExist) {
+    rejectedList.push(cardInfo);
+  }
+  interviewList = interviewList.filter(item => item.companyName != cardInfo.companyName)
+
+  if(currentStatus == 'interview-filter'){
+    renderInterview()
+  }
+  
+  jobCalculation()
+//   renderRejected()
+  }
+  
 });
 
 function renderInterview() {
@@ -98,6 +151,36 @@ function renderInterview() {
             <p class="benefit py-3">${interview.benefit}</p>
             <button class="apply-status btn bg-[#eef4ff]">${interview.applyStatus}</button>
             <p class="job-description py-3">${interview.jobDescription}</p>
+           </div>
+           <button class="interview-btn btn text-green-500 text-xl px-10 my-5 py-6 border-2 border-green-300">Interview</button>
+           <button class="rejected-btn btn text-red-500 text-xl px-10 my-5 py-6 border-2 border-red-500">Rejected</button>
+          </div>
+
+          <div class="">
+            <button class="btn-delete btn bg-base-100 text-xl rounded-full py-6 px-4"><i class="fa-solid fa-trash"></i></button>
+          </div>
+
+          </div>
+        `
+        filteredSection.appendChild(div)
+  }
+}
+
+function renderRejected() {
+  filteredSection.innerHTML = "";
+  for (let reject of rejectedList) {
+ 
+    let div = document.createElement("div");
+    div.className = "card-body border-2 border-gray-200 rounded-2xl";
+    div.innerHTML = `
+         <div class="flex justify-between space-y-5">
+            <div>
+           <div>
+             <h2 class="company-name card-title text-xl py-3">${reject.companyName}</h2>
+            <p class="job-title">${reject.jobTitle}</p>
+            <p class="benefit py-3">${reject.benefit}</p>
+            <button class="apply-status btn bg-[#eef4ff]">${reject.applyStatus}</button>
+            <p class="job-description py-3">${reject.jobDescription}</p>
            </div>
            <button class="interview-btn btn text-green-500 text-xl px-10 my-5 py-6 border-2 border-green-300">Interview</button>
            <button class="rejected-btn btn text-red-500 text-xl px-10 my-5 py-6 border-2 border-red-500">Rejected</button>
