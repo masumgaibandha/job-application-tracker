@@ -18,22 +18,7 @@ function jobCalculation() {
 
   interviewCount.innerText = interviewList.length;
   rejectedCount.innerText = rejectedList.length;
-
-  const totalJobs = allCards.querySelectorAll(".card-body").length;
-
-  totalCount.innerText = totalJobs;
-  availableJobs.innerText = totalJobs;
-
-  interviewCount.innerText = interviewList.length;
-  rejectedCount.innerText = rejectedList.length;
-
-  const emptyState = document.getElementById("empty-state");
-
-  if (totalJobs === 0) {
-    emptyState.classList.remove("hidden");
-  } else {
-    emptyState.classList.add("hidden");
-  }
+  
 }
 jobCalculation();
 
