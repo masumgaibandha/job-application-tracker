@@ -42,21 +42,21 @@
       }
     </style>
   </head>
-  <body>
+  <body class="bg-[#f8fafc]">
     <header  class="w-11/12 mx-auto">
       <h1 class="text-3xl font-bold py-10">Job Application Tracker</h1>
-      <div class="grid grid-cols-3 gap-3">
-        <div class="bg-amber-200 py-9 rounded-2xl pl-6">
-          <h2 id="total-count" class="text-3xl font-bold text-orange-500">0</h2>
-          <p class="text-2xl font-bold text-orange-400">Total</p>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+        <div class="bg-white border-2 border-gray-100 shadow-md  py-9 rounded-2xl pl-6">
+          <h2 id="total-count" class="text-3xl font-bold ">0</h2>
+          <p class="text-2xl font-bold ">Total</p>
         </div>
-        <div class="bg-green-200 py-9 rounded-2xl pl-6">
+        <div class="bg-white border-2 border-gray-100 shadow-md py-9 rounded-2xl pl-6">
+          <p class="text-2xl font-bold ">Interview</p>
           <h2 id="interview-count" class="text-3xl font-bold text-green-500">0</h2>
-          <p class="text-2xl font-bold text-green-500">Interview</p>
         </div>
-        <div class="bg-pink-200 py-9 rounded-2xl pl-6">
-          <h2 id="rejected-count" class="text-3xl font-bold text-pink-400">0</h2>
-          <p class="text-2xl font-bold text-pink-400">Rejected</p>
+        <div class="bg-white border-2 border-gray-100 shadow-md py-9 rounded-2xl pl-6">
+          <p class="text-2xl font-bold ">Rejected</p>
+          <h2 id="rejected-count" class="text-3xl font-bold text-red-400">0</h2>
         </div>
       </div>
     </header>
@@ -66,10 +66,9 @@
     <main  class="w-11/12 mx-auto">
       <div class="flex justify-between">
         <h2 class="text-2xl font-bold text-gray-500">Available Jobs</h2>
-        <!-- <h2 id="available-jobs" class="text-2xl font-bold text-gray-500">0 <span>Jobs</span></h2> -->
         <h2 class="text-2xl font-bold text-gray-500"><span id="available-jobs">0</span> Jobs</h2>
       </div>
-      <div class="py-10">
+      <div class="py-10 flex flex-col md:flex-row gap-3">
         <button onclick="toggleStyle('all-filter')"  id="all-filter" class="btn btn-primary text-white text-xl px-14 py-6">All</button>
         <button onclick="toggleStyle('interview-filter')"  id="interview-filter" class="btn bg-base-100 shadow-md text-xl px-14 py-6">Interview</button>
         <button onclick="toggleStyle('rejected-filter')" id="rejected-filter" class="btn  text-xl px-14 py-6 bg-base-100 shadow-md">Rejected</button>
