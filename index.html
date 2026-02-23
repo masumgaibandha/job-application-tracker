@@ -66,12 +66,13 @@
     <main  class="w-11/12 mx-auto">
       <div class="flex justify-between">
         <h2 class="text-2xl font-bold text-gray-500">Available Jobs</h2>
-        <h2 class="text-2xl font-bold text-gray-500">8 <span>Jobs</span></h2>
+        <!-- <h2 id="available-jobs" class="text-2xl font-bold text-gray-500">0 <span>Jobs</span></h2> -->
+        <h2 class="text-2xl font-bold text-gray-500"><span id="available-jobs">0</span> Jobs</h2>
       </div>
       <div class="py-10">
         <button onclick="toggleStyle('all-filter')"  id="all-filter" class="btn btn-primary text-white text-xl px-14 py-6">All</button>
-        <button onclick="toggleStyle('thriving-filter')"  id="thriving-filter" class="btn bg-base-100 shadow-md text-xl px-14 py-6">Interview</button>
-        <button onclick="toggleStyle('struggling-filter')" id="struggling-filter" class="btn  text-xl px-14 py-6 bg-base-100 shadow-md">Rejected</button>
+        <button onclick="toggleStyle('interview-filter')"  id="interview-filter" class="btn bg-base-100 shadow-md text-xl px-14 py-6">Interview</button>
+        <button onclick="toggleStyle('rejected-filter')" id="rejected-filter" class="btn  text-xl px-14 py-6 bg-base-100 shadow-md">Rejected</button>
       </div>
 
       <!-- <section id="filtered-section">
