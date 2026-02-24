@@ -18,6 +18,7 @@ function jobCalculation() {
 
   interviewCount.innerText = interviewList.length;
   rejectedCount.innerText = rejectedList.length;
+  updateEmptyState()
   
 }
 jobCalculation();
@@ -52,6 +53,7 @@ function toggleStyle(id) {
     filteredSection.classList.remove("hidden");
     renderRejected();
   }
+  updateEmptyState()
 }
 
 mainContainer.addEventListener("click", function (event) {
@@ -192,6 +194,7 @@ function renderInterview() {
         `;
     filteredSection.appendChild(div);
   }
+  updateEmptyState()
 }
 
 function renderRejected() {
@@ -221,4 +224,30 @@ function renderRejected() {
         `;
     filteredSection.appendChild(div);
   }
+updateEmptyState()
+}
+
+function updateEmptyState() {
+  const emptyState = document.getElementById("empty-state");
+  const emptyTitle = document.getElementById("empty-title");
+
+  let count = 0;
+
+  if (currentStatus === "all-filter") {
+    count = allCards.querySelectorAll(".card-body").length;
+    emptyTitle.innerText = "No jobs available";
+  } else if (currentStatus === "interview-filter") {
+    count = interviewList.length;
+    emptyTitle.innerText = "No interview jobs";
+  } else if (currentStatus === "rejected-filter") {
+    count = rejectedList.length;
+    emptyTitle.innerText = "No rejected jobs";
+  } else {
+
+    count = allCards.querySelectorAll(".card-body").length;
+    emptyTitle.innerText = "No jobs available";
+  }
+
+  if (count === 0) emptyState.classList.remove("hidden");
+  else emptyState.classList.add("hidden");
 }
